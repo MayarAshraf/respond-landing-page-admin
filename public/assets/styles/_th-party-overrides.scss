@@ -1,0 +1,404 @@
+@use "./utilities";
+
+:dir(rtl) {
+  .p-datepicker-header {
+    flex-direction: row-reverse;
+  }
+
+  .p-datepicker-input.p-filled,
+  .p-datepicker-hour-picker,
+  .p-datepicker-minute-picker,
+  .p-datepicker-second-picker,
+  .p-datepicker-ampm-picker,
+  .p-datepicker-select-year,
+  .p-datepicker-decade,
+  .p-datepicker-year-view,
+  .p-datepicker-day-view {
+    font-family: var(--poppins-font);
+  }
+
+  .fas.fa-chevron-right,
+  .pi.pi-chevron-right {
+    transform: rotate(180deg);
+  }
+}
+
+.p-floatlabel label {
+  font-size: 14px;
+  --p-floatlabel-font-weight: 400;
+}
+
+.p-tooltip-text {
+  font-size: 12px;
+}
+
+.p-button {
+  user-select: auto !important;
+}
+
+.p-dialog {
+  .p-dialog-close-button {
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  & > .p-dialog-content {
+    height: 100%;
+  }
+}
+
+ngx-loading-bar {
+  &[fixed="true"] {
+    z-index: var(--high-index) !important;
+  }
+}
+
+.p-password-toggle-mask-icon {
+  cursor: pointer;
+}
+
+.fas.fa-phone {
+  [dir="rtl"] & {
+    transform: rotate(-90deg);
+  }
+}
+
+.p-toast {
+  width: auto !important;
+  max-width: 25rem;
+
+  .p-toast-message {
+    border: 0;
+
+    &.p-toast-message-success {
+      color: #fff;
+      background-color: #1dc9b7;
+    }
+
+    &.p-toast-message-error {
+      color: #fff;
+      background-color: #fd387a;
+    }
+
+    &.p-toast-message-warn {
+      color: #242424;
+      background-color: #ffb822;
+    }
+
+    &.p-toast-message-info {
+      color: #2c3e7a;
+      background-color: #dde4fb;
+    }
+
+    .p-toast-message-content {
+      align-items: center;
+
+      .p-toast-close-button {
+        position: static;
+        color: inherit;
+        margin: 0;
+        background-color: rgba(#fff, 0.15);
+
+        &:hover {
+          background-color: rgba(#fff, 0.3);
+        }
+      }
+      .p-toast-message-text {
+        display: block;
+        .p-toast-detail {
+          color: inherit;
+        }
+      }
+    }
+  }
+}
+
+.p-popover {
+  width: min(350px, 95%);
+  margin: 0 !important;
+
+  &.lg-panel {
+    width: min(650px, 95%) !important;
+  }
+
+  &.sm-panel {
+    width: auto !important;
+  }
+
+  &::before,
+  &::after {
+    content: none !important;
+  }
+
+  .p-popover-content {
+    margin: 1rem;
+    padding-inline-end: 0.5rem;
+    margin-inline-end: 0.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+.p-menu {
+  font-size: 14px;
+
+  .p-menu-list {
+    max-height: 14rem;
+    overflow-y: auto;
+    @extend %scrollable-content;
+  }
+}
+
+%special-dropdown {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  .p-select-label {
+    padding: 0;
+    font-size: inherit;
+
+    &.p-placeholder {
+      font-weight: 400;
+    }
+  }
+
+  .p-select-dropdown {
+    width: 1.5rem;
+    border-radius: 0;
+  }
+
+  &:not(.is-loading) {
+    .p-select-dropdown {
+      @media (hover: hover) {
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.2s,
+          visibility 0.2s;
+      }
+    }
+    @media (hover: hover) {
+      &:hover {
+        .p-select-dropdown {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.p-select {
+  &.special-dropdown {
+    @extend %special-dropdown;
+  }
+
+  &.with-label-icon {
+    @extend %special-dropdown;
+    &.with-warm-icon .p-select-label::before {
+      content: "";
+      color: var(--yellow-color);
+    }
+    &.with-bars-icon .p-select-label::before {
+      content: "\f550";
+      color: inherit;
+    }
+    &.with-flag-icon .p-select-label::before {
+      content: "\f024";
+      color: inherit;
+    }
+    .p-select-label {
+      &::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 14px;
+        margin-inline-end: 4px;
+      }
+    }
+  }
+
+  &.primary-status-select {
+    gap: 5px;
+    padding: 5px 14px;
+    border: 0;
+    border-radius: 25px;
+    background-color: var(--p-primary-color);
+
+    &:hover {
+      background-color: var(--p-primary-600);
+    }
+    .p-select-label {
+      padding: 0;
+      font-size: 14px;
+      color: #fff;
+    }
+    .p-select-dropdown {
+      --p-select-dropdown-width: auto;
+      color: #fff;
+    }
+  }
+}
+
+.p-select-overlay {
+  min-width: 150px;
+  .p-select-list-container {
+    @extend %scrollable-content;
+  }
+
+  .p-select-header {
+    input.p-select-filter {
+      padding-block: 5px;
+      font-size: 14px;
+    }
+  }
+
+  .p-select-list {
+    .p-select-option-group {
+      color: var(--surface-400);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .p-select-option {
+      font-size: 14px;
+    }
+  }
+}
+
+.p-multiselect-overlay {
+  .p-multiselect-list {
+    .p-multiselect-option-group {
+      color: var(--surface-400);
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .p-multiselect-option {
+      font-size: 14px;
+    }
+  }
+}
+
+.p-steps {
+  ul {
+    .p-steps-item {
+      &-active {
+        .p-steps-item-link {
+          .p-steps-item-number {
+            background-color: var(--p-primary-color);
+            border-color: var(--p-primary-color);
+            color: #fff;
+          }
+        }
+      }
+      &:first-child::before {
+        :dir(rtl) & {
+          transform: none;
+        }
+      }
+      &:last-child::before {
+        :dir(rtl) & {
+          transform: translateX(100%);
+        }
+      }
+
+      .p-steps-item-number {
+        font-family: var(--poppins-font);
+        font-size: 14px;
+      }
+
+      .p-steps-item-label {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.p-datepicker {
+  &.custom-datepicker {
+    .p-datepicker-input {
+      padding-block: 3px;
+      border-start-start-radius: 1.5rem;
+      border-end-start-radius: 1.5rem;
+    }
+    .p-datepicker-dropdown {
+      border-start-end-radius: 1.5rem;
+      border-end-end-radius: 1.5rem;
+    }
+  }
+}
+
+.p-datepicker-panel {
+  padding: 5px !important;
+  .p-datepicker-header {
+    padding-bottom: 0;
+
+    button.p-datepicker-prev-button,
+    button.p-datepicker-next-button {
+      padding: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  .p-datepicker-year-view,
+  .p-datepicker-month-view,
+  .p-datepicker-day-view {
+    font-size: 14px;
+    margin: 3px 0;
+  }
+  .p-datepicker-weekday-cell {
+    padding: 2px;
+    .p-datepicker-weekday {
+      font-size: 14px;
+    }
+  }
+  .p-datepicker-day-cell {
+    padding: 2px;
+    .p-datepicker-day {
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 13px;
+    }
+  }
+  .p-datepicker-calendar-container + .p-datepicker-time-picker {
+    padding-block: 2px;
+    span {
+      font-size: 13px;
+    }
+    .p-datepicker-hour-picker,
+    .p-datepicker-ampm-picker,
+    .p-datepicker-minute-picker {
+      gap: 0;
+    }
+
+    .p-datepicker-decrement-button,
+    .p-datepicker-increment-button {
+      padding: 0;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}
+
+.p-galleria {
+  border: 0 !important;
+}
+
+.p-galleria-mask {
+  background-color: rgba(#000, 0.7) !important;
+}
+
+.p-drawer {
+  max-width: 100%;
+  &-title {
+    font-size: 1rem !important;
+  }
+}
+
+.p-tree-node-label {
+  font-size: 14px;
+}

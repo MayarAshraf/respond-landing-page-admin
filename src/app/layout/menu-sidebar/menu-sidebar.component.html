@@ -1,0 +1,100 @@
+<p-drawer
+  [(visible)]="visible"
+  [position]="currentLang() === 'en' ? 'left' : 'right'"
+  closable="false"
+  appendTo="body"
+  [closeOnEscape]="false"
+  [modal]="false"
+  styleClass="layout-sidebar"
+>
+  <ng-template #header>
+    <img
+      src="assets/media/8x-respond-logo.png"
+      style="width: 3.2rem"
+      alt="8X Respond Logo"
+    />
+  </ng-template>
+  <ng-template #content>
+    <div class="flex flex-column h-full">
+      <ul class="list-none p-0 m-0 text-center flex flex-column gap-3">
+        @for (link of topMenuItems(); track $index) {
+          @if (link.visible) {
+            <li>
+              <a
+                [routerLink]="link.routerLink"
+                routerLinkActive="text-primary"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [pTooltip]="link.label"
+              >
+                <i class="{{ link.icon }} text-xl font-meduim"></i>
+              </a>
+            </li>
+          }
+        }
+      </ul>
+      <ul
+        class="list-none p-0 m-0 text-center flex flex-column gap-3 mt-auto mb-3"
+      >
+        @for (link of bottomMenuItems(); track $index) {
+          @if (link.visible) {
+            <li>
+              <a
+                [routerLink]="link.routerLink"
+                routerLinkActive="text-primary"
+                [routerLinkActiveOptions]="{ exact: true }"
+                [pTooltip]="link.label | translate"
+              >
+                <i class="{{ link.icon }} text-xl font-meduim"></i>
+              </a>
+            </li>
+          }
+        }
+      </ul>
+      <ng-container *ngTemplateOutlet="settings"></ng-container>
+    </div>
+  </ng-template>
+</p-drawer>
+
+<ng-template #settings>
+  <div class="flex justify-content-center mb-3">
+    <button
+      pButton
+      class="border-0 bg-transparent p-0 hover:shadow-2"
+      [rounded]="true"
+      style="width: 2rem; height: 2rem"
+      (click)="op.toggle($event)"
+    >
+      <img
+        class="w-full h-full img-cover"
+        alt=""
+        [src]="currentUser()?.featured_image || 'assets/media/avatar.jpg'"
+      />
+    </button>
+    <p-popover #op styleClass="shadow-2 w-16rem">
+      <ng-container
+        *ngTemplateOutlet="user; context: { $implicit: currentUser() }"
+      ></ng-container>
+    </p-popover>
+  </div>
+</ng-template>
+
+<ng-template #user let-currentUser>
+  <div class="flex flex-column mb-2">
+    <span class="text-sm font-semibold">
+      {{ currentUser?.first_name }}
+    </span>
+    <span class="text-500 text-xs font-light">
+      {{ currentUser?.email }}
+    </span>
+    <div class="my-2">
+      <app-lang-switcher />
+    </div>
+  </div>
+  <button
+    pButton
+    icon="fa-solid fa-arrow-right-from-bracket text-white"
+    class="uppercase text-xs w-full bg-primary-color border-none shadow-none p-2"
+    (click)="logout()"
+    [label]="'logout' | translate"
+  ></button>
+</ng-template>

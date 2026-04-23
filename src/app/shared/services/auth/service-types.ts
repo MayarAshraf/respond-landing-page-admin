@@ -1,0 +1,15 @@
+export interface UserData {
+  accessToken: string;
+  expires_in: number;
+  user: User;
+}
+
+export interface User {
+  id: number;
+  role: { id: number; name: string; slug: string };
+  name: string;
+  email: string;
+  photo: string;
+  whatsapp_number: string;
+  featured_image: string;
+}

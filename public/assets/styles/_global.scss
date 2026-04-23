@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");
+
+:root {
+  // color: oklch(<lightness> <chroma> <hue>);
+  --lighter: oklch(
+    from var(--p-primary-color) clamp(0, l + 0.085, 1) calc(c * 0.9) h
+  );
+  --darker: oklch(
+    from var(--p-primary-color) clamp(0, l - 0.085, 1) calc(c * 0.9) h
+  );
+
+  --high-index: 9999;
+  --sidebar-width: 4rem;
+  --sidebar-width-lg: 285px;
+  --scrollbar-width: 7px;
+  --layout-inline-padding: 1rem;
+  --font-family: "Poppins", sans-serif;
+  --poppins-font: "Poppins", sans-serif;
+  --border-radius: 6px;
+  --green-color: #44ab4b;
+  --pink-color: #d53677;
+  --red-color: #f14726;
+  --yellow-color: #f2a510;
+  --purple-color: #960fac;
+  --dark-purple-color: #652ab8;
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--surface-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--surface-400);
+  border-radius: 8px;
+}
+
+body {
+  text-align: start;
+  font-family: var(--font-family);
+  background-color: var(--surface-200);
+  color: var(--p-text-color);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  // Prevent adjustments of font size after orientation changes in iOS.
+  -webkit-text-size-adjust: 100%;
+  // Change the default tap highlight to be completely transparent in iOS.
+  -webkit-tap-highlight-color: rgba(#000, 0);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// prevent background-color and font color changes due to autofill.
+input:-webkit-autofill {
+  transition: background-color 50000s ease-in-out, color 50000s ease-in-out;
+}
+
+input::placeholder {
+  color: var(--surface-400) !important;
+  line-height: 1.5 !important; /* ✅ important fix */
+}
